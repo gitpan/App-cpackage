@@ -9,7 +9,7 @@ use Config;
 use File::Copy;
 use File::Spec::Functions qw/catfile curdir/;
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 sub run {
     die "Usage: $0 cpanm_options module_name\n" unless @ARGV;
@@ -56,11 +56,11 @@ my @cpanm_options = @ARGV;
 
 while (<DATA>) {
     chomp;
-    if (my ($author, $file) = split '/') {
+    if (my ($author) = split '/') {
         my $a  = substr($author,0,1);
         my $ab = substr($author,0,2);
         
-        system($^X, 'bin/cpanm', @cpanm_options, "packages/authors/id/$a/$ab/$author/$file");
+        system($^X, 'bin/cpanm', @cpanm_options, "packages/authors/id/$a/$ab/$_");
     }
 }
 __DATA__
